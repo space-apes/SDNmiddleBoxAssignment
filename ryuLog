@@ -1,0 +1,580 @@
+src 00:00:00:00:00:01 was not in network adding a link in graph between that and current switch, 7
+destination 00:00:00:00:00:02 is not in graph. flooding.
+destination 00:00:00:00:00:02 is not in graph. flooding.
+destination 00:00:00:00:00:02 is not in graph. flooding.
+src 00:00:00:00:00:02 was not in network adding a link in graph between that and current switch, 7
+current dpid 7 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 7, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 5, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 9 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 5, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 7, out_port: 3
+current dpid 7 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 7, next: 00:00:00:00:00:01, out_port: 3
+current dpid 9 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 7 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 7, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 7, out_port: 3
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 5, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 7 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 7, next: 5, out_port: 4294967288
+current dpid 5 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 5, next: 1, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 7, out_port: 3
+current dpid 7 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 7, next: 00:00:00:00:00:01, out_port: 3
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 7 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 3, DPID: 7, next: 00:00:00:00:00:02, out_port: 4
+current dpid 5 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 7, out_port: 3
+src 00:00:00:00:00:03 was not in network adding a link in graph between that and current switch, 8
+current dpid 8 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 8, next: 5, out_port: 1
+current dpid 7 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 7, next: 5, out_port: 4294967288
+current dpid 5 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 5, next: 1, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 5, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 9 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 7, out_port: 3
+current dpid 5 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 7, out_port: 3
+current dpid 7 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 7, next: 00:00:00:00:00:02, out_port: 4
+current dpid 7 is in path ['00:00:00:00:00:01', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:02'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 7, next: 00:00:00:00:00:02, out_port: 4
+current dpid 7 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 7, next: 5, out_port: 1
+current dpid 7 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 7, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 5, next: 1, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 5, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 9 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 8, out_port: 4
+current dpid 5 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 7, out_port: 3
+current dpid 7 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 7, '00:00:00:00:00:01'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 7, next: 00:00:00:00:00:01, out_port: 3
+current dpid 8 is in path ['00:00:00:00:00:02', 7, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 8, next: 00:00:00:00:00:03, out_port: 3
+src 00:00:00:00:00:04 was not in network adding a link in graph between that and current switch, 8
+current dpid 8 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 8, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 5, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 8, out_port: 4
+current dpid 8 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:03'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 8, next: 00:00:00:00:00:03, out_port: 3
+current dpid 8 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:04'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 8, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:04'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 5, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:04'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:04'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:04'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:04'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 5, next: 8, out_port: 4
+current dpid 8 is in path ['00:00:00:00:00:03', 8, 5, 1, 9, 1, 5, 8, '00:00:00:00:00:04'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 8, next: 00:00:00:00:00:04, out_port: 4
+src 00:00:00:00:00:05 was not in network adding a link in graph between that and current switch, 11
+current dpid 11 is in path ['00:00:00:00:00:05', 11, 9, 1, 5, 8, '00:00:00:00:00:04'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 11, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:05', 11, 9, 1, 5, 8, '00:00:00:00:00:04'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 9, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:05', 11, 9, 1, 5, 8, '00:00:00:00:00:04'] once. not accounting for loop
+PICKED NEXT in_port = 2, DPID: 1, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:05', 11, 9, 1, 5, 8, '00:00:00:00:00:04'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 5, next: 8, out_port: 4
+current dpid 8 is in path ['00:00:00:00:00:05', 11, 9, 1, 5, 8, '00:00:00:00:00:04'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 8, next: 00:00:00:00:00:04, out_port: 4
+current dpid 8 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 11, '00:00:00:00:00:05'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 8, next: 5, out_port: 1
+current dpid 5 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 11, '00:00:00:00:00:05'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 5, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 11, '00:00:00:00:00:05'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 11, '00:00:00:00:00:05'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 9, next: 11, out_port: 3
+current dpid 11 is in path ['00:00:00:00:00:04', 8, 5, 1, 9, 11, '00:00:00:00:00:05'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 11, next: 00:00:00:00:00:05, out_port: 3
+src 00:00:00:00:00:06 was not in network adding a link in graph between that and current switch, 11
+current dpid 11 is in path ['00:00:00:00:00:06', 11, 9, 11, '00:00:00:00:00:05'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 11, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:06', 11, 9, 11, '00:00:00:00:00:05'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 3, DPID: 9, next: 11, out_port: 4294967288
+current dpid 11 is in path ['00:00:00:00:00:06', 11, 9, 11, '00:00:00:00:00:05'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 11, next: 00:00:00:00:00:05, out_port: 3
+current dpid 11 is in path ['00:00:00:00:00:05', 11, 9, 11, '00:00:00:00:00:06'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 11, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:05', 11, 9, 11, '00:00:00:00:00:06'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 3, DPID: 9, next: 11, out_port: 4294967288
+current dpid 11 is in path ['00:00:00:00:00:05', 11, 9, 11, '00:00:00:00:00:06'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 11, next: 00:00:00:00:00:06, out_port: 4
+src 00:00:00:00:00:07 was not in network adding a link in graph between that and current switch, 12
+current dpid 12 is in path ['00:00:00:00:00:07', 12, 9, 11, '00:00:00:00:00:06'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 12, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:07', 12, 9, 11, '00:00:00:00:00:06'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 9, next: 11, out_port: 3
+current dpid 11 is in path ['00:00:00:00:00:07', 12, 9, 11, '00:00:00:00:00:06'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 11, next: 00:00:00:00:00:06, out_port: 4
+current dpid 11 is in path ['00:00:00:00:00:06', 11, 9, 12, '00:00:00:00:00:07'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 11, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:06', 11, 9, 12, '00:00:00:00:00:07'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 9, next: 12, out_port: 4
+current dpid 12 is in path ['00:00:00:00:00:06', 11, 9, 12, '00:00:00:00:00:07'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 12, next: 00:00:00:00:00:07, out_port: 3
+src 00:00:00:00:00:08 was not in network adding a link in graph between that and current switch, 12
+current dpid 12 is in path ['00:00:00:00:00:08', 12, 9, 12, '00:00:00:00:00:07'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 12, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:08', 12, 9, 12, '00:00:00:00:00:07'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 4, DPID: 9, next: 12, out_port: 4294967288
+current dpid 12 is in path ['00:00:00:00:00:08', 12, 9, 12, '00:00:00:00:00:07'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 12, next: 00:00:00:00:00:07, out_port: 3
+current dpid 12 is in path ['00:00:00:00:00:07', 12, 9, 12, '00:00:00:00:00:08'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 12, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:07', 12, 9, 12, '00:00:00:00:00:08'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 4, DPID: 9, next: 12, out_port: 4294967288
+current dpid 12 is in path ['00:00:00:00:00:07', 12, 9, 12, '00:00:00:00:00:08'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 12, next: 00:00:00:00:00:08, out_port: 4
+src 00:00:00:00:00:09 was not in network adding a link in graph between that and current switch, 15
+current dpid 15 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 12, '00:00:00:00:00:08'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 15, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 12, '00:00:00:00:00:08'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 12, '00:00:00:00:00:08'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 12, '00:00:00:00:00:08'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 9, next: 12, out_port: 4
+current dpid 12 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 12, '00:00:00:00:00:08'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 12, next: 00:00:00:00:00:08, out_port: 4
+current dpid 12 is in path ['00:00:00:00:00:08', 12, 9, 1, 13, 15, '00:00:00:00:00:09'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 12, next: 9, out_port: 1
+current dpid 9 is in path ['00:00:00:00:00:08', 12, 9, 1, 13, 15, '00:00:00:00:00:09'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 9, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:08', 12, 9, 1, 13, 15, '00:00:00:00:00:09'] once. not accounting for loop
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:08', 12, 9, 1, 13, 15, '00:00:00:00:00:09'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 13, next: 15, out_port: 3
+current dpid 15 is in path ['00:00:00:00:00:08', 12, 9, 1, 13, 15, '00:00:00:00:00:09'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 15, next: 00:00:00:00:00:09, out_port: 3
+src 00:00:00:00:00:0a was not in network adding a link in graph between that and current switch, 15
+current dpid 15 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:09'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 15, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:09'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:09'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:09'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:09'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:09'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 13, next: 15, out_port: 3
+current dpid 15 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:09'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 15, next: 00:00:00:00:00:09, out_port: 3
+current dpid 15 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 15, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 13, next: 15, out_port: 3
+current dpid 15 is in path ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 15, next: 00:00:00:00:00:0a, out_port: 4
+src 00:00:00:00:00:0b was not in network adding a link in graph between that and current switch, 16
+current dpid 16 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 16, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 13, next: 15, out_port: 3
+current dpid 15 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 15, '00:00:00:00:00:0a'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 15, next: 00:00:00:00:00:0a, out_port: 4
+current dpid 15 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 15, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 13, next: 16, out_port: 4
+current dpid 16 is in path ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 16, next: 00:00:00:00:00:0b, out_port: 3
+src 00:00:00:00:00:0c was not in network adding a link in graph between that and current switch, 16
+current dpid 16 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 16, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 13, next: 16, out_port: 4
+current dpid 16 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 16, next: 00:00:00:00:00:0b, out_port: 3
+current dpid 16 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 16, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 13, next: 16, out_port: 4
+current dpid 16 is in path ['00:00:00:00:00:0b', 16, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 16, next: 00:00:00:00:00:0c, out_port: 4
+src 00:00:00:00:00:0d was not in network adding a link in graph between that and current switch, 19
+current dpid 19 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 19, next: 17, out_port: 1
+current dpid 17 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 17, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 13, out_port: 3
+current dpid 13 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 13, next: 16, out_port: 4
+current dpid 16 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 13, 16, '00:00:00:00:00:0c'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 16, next: 00:00:00:00:00:0c, out_port: 4
+current dpid 16 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 16, next: 13, out_port: 1
+current dpid 13 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 13, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 17, out_port: 4
+current dpid 17 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 17, next: 19, out_port: 3
+current dpid 19 is in path ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 19, next: 00:00:00:00:00:0d, out_port: 3
+src 00:00:00:00:00:0e was not in network adding a link in graph between that and current switch, 19
+current dpid 19 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 19, next: 17, out_port: 1
+current dpid 17 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 17, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 17, out_port: 4
+current dpid 17 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 17, next: 19, out_port: 3
+current dpid 19 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0d'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 19, next: 00:00:00:00:00:0d, out_port: 3
+current dpid 19 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 19, next: 17, out_port: 1
+current dpid 17 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 17, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 17, out_port: 4
+current dpid 17 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 17, next: 19, out_port: 3
+current dpid 19 is in path ['00:00:00:00:00:0d', 19, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 19, next: 00:00:00:00:00:0e, out_port: 4
+src 00:00:00:00:00:0f was not in network adding a link in graph between that and current switch, 20
+current dpid 20 is in path ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] once. not accounting for loop
+PICKED NEXT in_port = 3, DPID: 20, next: 17, out_port: 1
+current dpid 17 is in path ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 17, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 17, out_port: 4
+current dpid 17 is in path ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 17, next: 19, out_port: 3
+current dpid 19 is in path ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 17, 19, '00:00:00:00:00:0e'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 19, next: 00:00:00:00:00:0e, out_port: 4
+current dpid 19 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] once. not accounting for loop
+PICKED NEXT in_port = 4, DPID: 19, next: 17, out_port: 1
+current dpid 17 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 3, DPID: 17, next: 1, out_port: 1
+current dpid 1 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 1, next: 9, out_port: 2
+current dpid 9 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] once. not accounting for loop
+but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT
+PICKED NEXT in_port = 1, DPID: 9, next: 1, out_port: 4294967288
+current dpid 1 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 2, DPID: 1, next: 17, out_port: 4
+current dpid 17 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] twice accounting for loop
+afterMB
+PICKED NEXT in_port = 1, DPID: 17, next: 20, out_port: 4
+current dpid 20 is in path ['00:00:00:00:00:0e', 19, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] once. not accounting for loop
+PICKED NEXT in_port = 1, DPID: 20, next: 00:00:00:00:00:0f, out_port: 3
+src 00:00:00:00:00:10 was not in network adding a link in graph between that and current switch, 20
+self.VMPairList[0]['shortestPaths'][0] is ['00:00:00:00:00:10', 20, 17, 1, 9, 1, 5, 8, '00:00:00:00:00:03']
+self.VMPairList[0]['shortestPaths'][1] is ['00:00:00:00:00:10', 20, 18, 3, 6, 8, '00:00:00:00:00:03']
+self.VMPairList[1]['shortestPaths'][0] is ['00:00:00:00:00:08', 12, 9, 11, '00:00:00:00:00:05']
+self.VMPairList[1]['shortestPaths'][1] is ['00:00:00:00:00:08', 12, 10, 3, 10, 11, '00:00:00:00:00:05']
+self.VMPairList[2]['shortestPaths'][0] is ['00:00:00:00:00:0a', 15, 13, 1, 9, 1, 13, 16, '00:00:00:00:00:0b']
+self.VMPairList[2]['shortestPaths'][1] is ['00:00:00:00:00:0a', 15, 14, 3, 14, 16, '00:00:00:00:00:0b']
+self.VMPairList[3]['shortestPaths'][0] is ['00:00:00:00:00:0c', 16, 13, 1, 9, 1, 5, 8, '00:00:00:00:00:04']
+self.VMPairList[3]['shortestPaths'][1] is ['00:00:00:00:00:0c', 16, 14, 3, 6, 8, '00:00:00:00:00:04']
+self.VMPairList[4]['shortestPaths'][0] is ['00:00:00:00:00:0e', 19, 17, 1, 9, 11, '00:00:00:00:00:06']
+self.VMPairList[4]['shortestPaths'][1] is ['00:00:00:00:00:0e', 19, 18, 3, 10, 11, '00:00:00:00:00:06']
+self.VMPairList[5]['shortestPaths'][0] is ['00:00:00:00:00:09', 15, 13, 1, 9, 1, 5, 7, '00:00:00:00:00:02']
+self.VMPairList[5]['shortestPaths'][1] is ['00:00:00:00:00:09', 15, 14, 3, 6, 7, '00:00:00:00:00:02']
+self.VMPairList[6]['shortestPaths'][0] is ['00:00:00:00:00:0f', 20, 17, 1, 9, 1, 5, 7, '00:00:00:00:00:01']
+self.VMPairList[6]['shortestPaths'][1] is ['00:00:00:00:00:0f', 20, 18, 3, 6, 7, '00:00:00:00:00:01']
+self.VMPairList[7]['shortestPaths'][0] is ['00:00:00:00:00:07', 12, 9, 1, 17, 19, '00:00:00:00:00:0d']
+self.VMPairList[7]['shortestPaths'][1] is ['00:00:00:00:00:07', 12, 10, 3, 18, 19, '00:00:00:00:00:0d']
+calling fillShortestPaths, pathsCalculated = True
+current dpid 20 is in path ['00:00:00:00:00:10', 20, 17, 1, 9, 1, 17, 20, '00:00:00:00:00:0f'] twice accounting for loop
+beforeMB
+PICKED NEXT in_port = 4, DPID: 20, next: 17, out_port: 1
+ADDING FLOW: DPID: 20, MATCHING SRC: 00:00:00:00:00:10, DST: 00:00:00:00:00:0f, in_port: 4, out_port: 1
+when getting pair from list,  src 00:00:00:00:00:10 and dst00:00:00:00:00:0f not found
+network only supports traffic between deisgnated pairs. packetInHandler returning
+when getting pair from list,  src 00:00:00:00:00:10 and dst00:00:00:00:00:0f not found
+network only supports traffic between deisgnated pairs. packetInHandler returning
