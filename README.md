@@ -19,6 +19,16 @@ in a Mininet environment.
 	that pairs of hosts should be routed through to minimize network traffic latency and load on
 	each middlebox.  
 
+	For the purposes of the project the terms "VM" and "host" will be used interchangeably because the hosts 
+	are virtual in the experiment.
+
+	The 3 algorithms explored are:
+		-Host-Based: for each host select the first middlebox that has not met its load cap
+		-MB-Based: for each MB sort unassigned host-pairs and assign until MB meets load cap
+		-Host-MB-based: in multiple rounds, cycle through all combinations of non-maxed MB and unassigned VMpair
+			and assign lowest cost combination.
+
+		
 
 
 
