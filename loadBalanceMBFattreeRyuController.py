@@ -10,22 +10,10 @@
 #	-VM-MB based
 #
 #across 3 randomized scenarios
-#TODO
-#To add MB selection algorithms
-#make sure all shortest paths from vm->MBX->vm have been determined
-#check if MB is chosen (maybe with global flag)
-#if not chosen, choose MB for all VMPairs using appropriate algorithm
-#after being chosen, 
 
 
-
-#DO SOMETHING TO REPLACE SELF.CURRENTMB?!
-#try only iterating through MBs within fillShortestPathsForAllVMPairs
-#if it breaks everything create boolean allMBSelected
-
-
-
-
+#TODO: add in command line arguments for picking scenario, random scenario, and algorithm choice
+#TODO: determine how to integrate iperf tests seamlessly into user experience
 
 from ryu.base import app_manager
 from ryu.controller import ofp_event
@@ -33,12 +21,14 @@ from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_3
 from ryu.lib.packet import packet, ethernet, ether_types, arp
-from utils import hToMac, indexOfSecondInstance
+from utils import hToMac, MACToH, indexOfSecondInstance
 from ryu.lib import stplib
 import networkx
 
 from ryu.topology import event, switches
 from ryu.topology.api import get_switch, get_link, get_host, get_all_host
+
+from mbSelectionAlgorithms import hostBasedMBSelection, MBBasedMBSelection, hostAndMBBasedMBSelection
 
 class loadBalanceMBFattree(app_manager.RyuApp):
 	OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -70,7 +60,7 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 #		self.currentMBIndex = 0
 #		
 #		maximum load in terms of VM pairs assigned to the middleBoxes
-		self.maxVMPairsPerMB = 8;
+		self.maxVMPairsPerMB = 4;
 #		global reference to all VM pairs. contains 
 #			-macAddresses for source and destination of vm pairs 	
 #			-the final selected DPID of best choice of MB
@@ -105,7 +95,7 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 		#1: vm-based
 		#2: mb-based
 		#3: vm/mb-based
-		self.algoChoice = 1
+		self.algoChoice = 3
 		
 #	NAME: populateScenarioValues
 #	SIGNATURE: (scenarioDict)->
@@ -148,9 +138,8 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 					secondHalf = networkx.shortest_path(self.net, self.MBList[MBIndex]['dpid'], theDestination)
 					shortestPath = firstHalf+secondHalf[1:]
 					self.VMPairList[VMPairIndex]['shortestPaths'][MBIndex] = shortestPath 
-					print("self.VMPairList[%d]['shortestPaths'][%d] is %s" % (VMPairIndex, MBIndex, shortestPath))	
+					#print("self.VMPairList[%d]['shortestPaths'][%d] is %s" % (VMPairIndex, MBIndex, shortestPath))	
 		self.allPathsCalculated = True
-		print('calling fillShortestPaths, pathsCalculated = %s'% self.pathsCalculated)
 
 #	NAME: selectMBForAllVMPairs
 #	SIGNATURE: (int)->
@@ -171,14 +160,21 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 
 	#FAKE VERSION
 	def selectMBForAllVMPairs(self, algoChoice):
-		for pairIndex in range(4):
-			self.VMPairList[pairIndex]['bestMBDPID'] = self.MBList[0]['dpid']
-			self.MBList[0]['load'] += 1
-		for pairIndex in range(4,8):
-			self.VMPairList[pairIndex]['bestMBDPID'] = self.MBList[1]['dpid']
-			self.MBList[1]['load'] += 1
+		if algoChoice == 1:
+			print("selecting MBs for host pairs using host-based algorithm")
+			hostBasedMBSelection(self.VMPairList, self.MBList, self.maxVMPairsPerMB)
+		elif algoChoice == 2:
+			print("selecting MBs for host pairs using MB-based algorithm")
+			MBBasedMBSelection(self.VMPairList, self.MBList, self.maxVMPairsPerMB)
+		elif algoChoice == 3:
+			print("selecting MBs for host pairs using host and MB based algorithm")
+			hostAndMBBasedMBSelection(self.VMPairList, self.MBList, self.maxVMPairsPerMB)
+		else:
+			print("invalid MB selection algorithm. defaulting to host-based MB selection algorithm")
+			hostBasedMBSelection(self.VMPairList, self.MBList, self.maxVMPairsPerMB)
 		self.allMBsSelected = True
-
+		self.printSelectionsAndCosts()
+		
 
 
 
@@ -188,15 +184,21 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 #	display, for all MBs, which VMPairs were selected, what paths do they take, what is the cost in 
 #	network hops, what is the load on the MB, and finally what is the overall cost in hops for the entire instance
 #	of the experiment. 
-
+#
 #	TODO: finish it. make it pretty. 
 	def printSelectionsAndCosts(self):
 		totalCost = 0
-		for MB in self.MBList:
-			print("MB: {}".format(MB['dpid']))
-			for VMPair in self.VMPairList:
-				if VMPair['bestMBDPID'] == MB['dpid']:
-					print("{}->{}->{}:  cost: ".format(VMPair['VM0'], MB['dpid'], VMPair['VM1']))
+		for MBIndex in range(len(self.MBList)):
+			print("MB: {}".format(self.MBList[MBIndex]['dpid']))
+			for hostPairIndex in range(len(self.VMPairList)):
+				curHostPair = self.VMPairList[hostPairIndex]
+				if curHostPair['bestMBDPID'] == self.MBList[MBIndex]['dpid']:
+					curPath = curHostPair['shortestPaths'][MBIndex]
+					totalCost += len(curPath)-1
+					host1 = MACToH(self.VMPairList[hostPairIndex]['VM0'])
+					host2 = MACToH(self.VMPairList[hostPairIndex]['VM1'])
+					print("{}->{}->{}: {}  cost: {}".format(host1, self.MBList[MBIndex]['dpid'], host2, curPath, len(curPath)))
+		print("TOTAL COST: {:>}".format(str(totalCost)))
 	
 
 
@@ -219,11 +221,11 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 	def getPairIndexAndDirection(self, src, dst):
 		for i in range(len(self.VMPairList)):
 			if src == self.VMPairList[i]['VM0'] and dst == self.VMPairList[i]['VM1']:
-				print("found a pair for src %s and dst %s" % (src,dst))
+				#print("found a pair for src %s and dst %s" % (src,dst))
 				return (i, 'forward')
 			
 			if src == self.VMPairList[i]['VM1'] and dst == self.VMPairList[i]['VM0']:
-				print("found a pair for src %s and dst %s" % (src,dst))
+				#print("found a pair for src %s and dst %s" % (src,dst))
 				return (i, 'backward')
 
 		print ('when getting pair from list,  src %s and dst%s not found' % (src, dst))
@@ -376,10 +378,10 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 					print("finding single path failed. exception: %s" % e)"""
 			else:
 				
+				#print("***ALL SHORTEST PATHS HOST->MB-HOST ARE CALCULATED***")
 				#run appropriate MB selection algorithm to select correct MB for VMPair
 				if self.allMBsSelected == False: 
 					self.selectMBForAllVMPairs(self.algoChoice)
-					self.printSelectionsAndCosts()
 				#get shortest path from host->selectedmb->host
 				VMPairIndexAndDirection = self.getPairIndexAndDirection(src, dst) 	
 				pairIndex = VMPairIndexAndDirection[0]
@@ -392,15 +394,15 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 				 	print("can't find appropriate MBIndex to determine best path. packetInHandler returning")
 				 	return
 				if pairIndex == -1:
-					print("network only supports traffic between deisgnated pairs. packetInHandler returning")
+					print("network only supports traffic between designated pairs. packetInHandler returning")
 					return
 				#still using pre-calculated vm->mb->vm path 
 				#but if dst/src are flipped, then flip the path
 				if direction == 'forward':
-					print('going forward')
+					#print('going forward')
 					path = self.VMPairList[pairIndex]['shortestPaths'][MBIndex] 
 				else:
-					print('going backward')
+					#print('going backward')
 					path = self.VMPairList[pairIndex]['shortestPaths'][MBIndex][::-1] 
 				#firstHalf = path[:path.index(currentMBDPID)+1]
 				#secondHalf = path[path.index(currentMBDPID)+1:]
@@ -426,10 +428,10 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 				#print("current dpid %s not in path so packetInHandler returning" % dpid)
 				return
 			elif path.count(dpid) == 1:
-				print("current dpid %s is in path %s once. not accounting for loop"% (dpid, path))
+				#print("current dpid %s is in path %s once. not accounting for loop"% (dpid, path))
 				next = path[path.index(dpid)+1]
 			elif path.count(dpid) == 2:
-				print("current dpid %s is in path %s twice accounting for loop" % (dpid, path))
+				#print("current dpid %s is in path %s twice accounting for loop" % (dpid, path))
 				
 				if src not in self.afterMB:
 					self.afterMB[src] = {}
@@ -439,11 +441,11 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 					self.afterMB[src][dst][dpid] = False
 				
 				if self.afterMB[src][dst][dpid] == False:
-					print("beforeMB")
+					#print("beforeMB")
 					next = path[path.index(dpid)+1]
 					self.afterMB[src][dst][dpid] = True
 				else:
-					print("afterMB")
+					#print("afterMB")
 					next = path[indexOfSecondInstance(dpid, path)+1]
 					self.afterMB[src][dst][dpid] = False
 				
@@ -456,10 +458,10 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 
 			#THE MISSING LINE THAT FIXED EVERYTHING!
 			if in_port == out_port:
-				print("but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT")
+				#print("but because in_port and out_port are equal, we will use special port ofproto.OFPP_IN_PORT")
 				out_port = ofproto.OFPP_IN_PORT
 			
-			print("PICKED NEXT in_port = %s, DPID: %s, next: %s, out_port: %s" %(in_port, dpid, next, out_port))
+			#print("PICKED NEXT in_port = %s, DPID: %s, next: %s, out_port: %s" %(in_port, dpid, next, out_port))
 			actions = [parser.OFPActionOutput(out_port)]
 			#print("SUCCESS! (DPID: %s)%s->MB(%s)->%s path found: %s " % (dpid, src, currentMBDPID, dst, path))				
 		else:
@@ -471,7 +473,7 @@ class loadBalanceMBFattree(app_manager.RyuApp):
 		#if the outgoing port is not flood (meaning the destination is a mac address in digraph)
 		#add a flow entry to bypass controller next time
 		if out_port != ofproto.OFPP_FLOOD and self.allPathsCalculated == True and self.allMBsSelected == True:
-			print("ADDING FLOW: DPID: %s, MATCHING SRC: %s, DST: %s, in_port: %s, out_port: %s"% (dpid, src, dst, in_port, out_port))
+			#print("ADDING FLOW: DPID: %s, MATCHING SRC: %s, DST: %s, in_port: %s, out_port: %s"% (dpid, src, dst, in_port, out_port))
 			match = parser.OFPMatch(in_port=in_port, eth_src=src, eth_dst=dst)
 			
 			#if we have valid buffer_id means the switch has buffered the packet

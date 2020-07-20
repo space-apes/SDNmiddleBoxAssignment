@@ -17,7 +17,7 @@ return totalCost
 
 
 ***MB-BASED
-*cycles through MBS assigning unassigned pairs to MBs based on lowest cost each iteration
+*cycles through MBS greedily assigning unassigned pairs to MBs based on lowest cost each iteration
 
 calculate paths and costs for each VMpair/MB combination
 bool VMassigned = []

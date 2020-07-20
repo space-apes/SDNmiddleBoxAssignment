@@ -3,6 +3,8 @@ def hToMac(hostInt):
 	if len(hexy) == 1:
 		hexy = '0'+hexy
 	return '00:00:00:00:00:'+hexy
+def MACToH(hostMAC):
+	return "h"+str(int(hostMAC[-1], 16))
 def indexOfSecondInstance(val, inList):
 	count = 0 
 	for x in range(len(inList)):
